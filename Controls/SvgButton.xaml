@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="WPF_GUI_04.Controls.SvgButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_GUI_04.Controls"
+             mc:Ignorable="d" 
+             x:Name="svgBtnControl"
+             d:DesignHeight="60" 
+             d:DesignWidth="60">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Path}">
+            <Setter Property="Fill" Value="White" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Fill" Value="{Binding ForegroundHoverColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SvgButton}}}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=IsMouseOver}" Value="False">
+                    <Setter Property="Fill" Value="{Binding ForegroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SvgButton}}}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="{Binding BackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SvgButton}}}" />
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{Binding BackgroundHoverColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SvgButton}}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid x:Name="svgButtonControl">
+        <Viewbox>
+            <Path>
+                <Path.Data>
+                    <PathGeometry Figures="{Binding PathGeometrie, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SvgButton}}}" />
+                </Path.Data>
+            </Path>
+        </Viewbox>
+    </Grid>
+</UserControl>
